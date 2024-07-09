@@ -97,25 +97,22 @@ class CSVFileVariableModelViewset(viewsets.ModelViewSet):
 
         operation = pythonData["data"]["operation"]
 
-        match operation:
-            case "forcesplit":
-                data = forceSplit(pythonData)
-                return data
-            case "findsplit":
-                data = findSplit(pythonData)
-                return data
-            case "nextsplit":
-                data = nextSplit(pythonData)
-                return data
-            case "prevsplit":
-                data = prevSplit(pythonData)
-                return data
-            case "treegrow":
-                data = treeGrow(pythonData)
-                return data
-            case "deletesubnodes":
-                data = deleteSubnodes(pythonData)
-                return data
+        if operation == "forcesplit":
+            data = forceSplit(pythonData)
+        elif operation == "findsplit":
+            data = findSplit(pythonData)
+        elif operation == "nextsplit":
+            data = nextSplit(pythonData)
+        elif operation == "prevsplit":
+            data = prevSplit(pythonData)
+        elif operation == "treegrow":
+            data = treeGrow(pythonData)
+        elif operation == "deletesubnodes":
+            data = deleteSubnodes(pythonData)
+        else:
+            data = {"error": "Unknown operation"}
+
+        return data
 
 
 def selectYvar(pythonData):
